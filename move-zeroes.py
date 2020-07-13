@@ -6,39 +6,58 @@ class Solution:
 
     def moveZeroes(self, nums: List[int]) -> None:
 
-        return None
+        #return self.quickSort(nums, 0, len(nums) - 1)
+        return self.quick_sort(nums, 0, len(nums) - 1)
 
-    def quickSort(self, nums: List[int], left: int, right: int) -> List[int]:
+    def quickSort(self, nums: List[int], begin: int, end: int) -> List[int]:
 
-        if (left < right):
+        if (begin < end):
 
-            baseNum = nums[left]
-            begin = left
-            end = right
+            key = nums[begin]
+            left = begin
+            right = end
 
-            while begin < end:
+            while left < right:
 
-                if nums[begin] < baseNum:
-                    begin += 1
+                while left < right and nums[right] >= key:
+                    right -= 1
 
-                elif nums[end] > baseNum:
-                    end -= 1
+                while left < right and nums[left] < key:
+                    left += 1
 
-                else:
-                    temp = nums[begin]
-                    nums[begin] = nums[end]
-                    nums[end] = temp
+                if left < right:
+                    temp = nums[left]
+                    nums[left] = nums[right]
+                    nums[right] = temp
 
-            temp = baseNum
-            baseNum = nums[end]
-            nums[end] = temp
+            nums[begin] = nums[left]
+            nums[left] = key
 
-            self.quickSort(nums, left, begin - 1)
-            self.quickSort(nums, begin + 1, right)
+            self.quickSort(nums, begin, left - 1)
+            self.quickSort(nums, left + 1, end)
 
         return nums
+
+    def quick_sort(self, array: List[int], left: int, right: int):
+        if left >= right:
+            return
+        low = left
+        high = right
+        key = array[low]
+        while left < right:
+            while left < right and array[right] > key:
+                right -= 1
+            array[left] = array[right]
+            while left < right and array[left] <= key:
+                left += 1
+            array[right] = array[left]
+        array[right] = key
+        self.quick_sort(array, low, left - 1)
+        self.quick_sort(array, left + 1, high)
+
+        return array
 
 
 test = Solution()
 
-test.quickSort([0, 1, 0, 3, 12], 0, 4)
+print(test.moveZeroes([0, 1, 0, 3, 12]))
