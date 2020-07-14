@@ -6,57 +6,38 @@ class Solution:
 
     def moveZeroes(self, nums: List[int]) -> None:
 
-        #return self.quickSort(nums, 0, len(nums) - 1)
-        return self.quick_sort(nums, 0, len(nums) - 1)
+        return self.move_zeros(nums)
 
-    def quickSort(self, nums: List[int], begin: int, end: int) -> List[int]:
-
-        if (begin < end):
-
-            key = nums[begin]
-            left = begin
-            right = end
-
-            while left < right:
-
-                while left < right and nums[right] >= key:
-                    right -= 1
-
-                while left < right and nums[left] < key:
-                    left += 1
-
-                if left < right:
-                    temp = nums[left]
-                    nums[left] = nums[right]
-                    nums[right] = temp
-
-            nums[begin] = nums[left]
-            nums[left] = key
-
-            self.quickSort(nums, begin, left - 1)
-            self.quickSort(nums, left + 1, end)
+    def move_zeros(self, nums: List[int]) -> List[int]:
+        count = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[count] = nums[i]
+                count += 1
+        for i in range(count, len(nums)):
+            nums[i] = 0
 
         return nums
 
-    def quick_sort(self, array: List[int], left: int, right: int):
-        if left >= right:
-            return
-        low = left
-        high = right
-        key = array[low]
+
+"""
+    def move_zerosB(self, nums: List[int]) -> List[int]:
+        left = 0
+        right = len(nums) - 1
         while left < right:
-            while left < right and array[right] > key:
-                right -= 1
-            array[left] = array[right]
-            while left < right and array[left] <= key:
-                left += 1
-            array[right] = array[left]
-        array[right] = key
-        self.quick_sort(array, low, left - 1)
-        self.quick_sort(array, left + 1, high)
+            while left < right and nums[left] == 0:
+                
+        return []
+"""
+"""
+    def move_zeros(self, nums: List[int]) -> List[int]:
+        for num in nums:
+            if num == 0:
+                nums.append(num)
+                nums.remove(num)
 
-        return array
-
+        return nums
+"""
 
 test = Solution()
 
