@@ -6,7 +6,8 @@ class Solution:
 
     def moveZeroes(self, nums: List[int]) -> None:
 
-        return self.move_zeros(nums)
+        # return self.move_zeros(nums)
+        return self.move_zerosB(nums)
 
     def move_zeros(self, nums: List[int]) -> List[int]:
         count = 0
@@ -19,16 +20,20 @@ class Solution:
 
         return nums
 
+    # 双指针是数组题目的经典解法, 大多数情况下是效率最高的
 
-"""
     def move_zerosB(self, nums: List[int]) -> List[int]:
-        left = 0
-        right = len(nums) - 1
-        while left < right:
-            while left < right and nums[left] == 0:
-                
-        return []
-"""
+        low = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                temp = nums[i]
+                nums[i] = nums[low]
+                nums[low] = temp
+                low += 1
+
+        return nums
+
+
 """
     def move_zeros(self, nums: List[int]) -> List[int]:
         for num in nums:
