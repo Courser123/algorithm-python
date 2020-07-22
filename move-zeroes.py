@@ -6,10 +6,11 @@ class Solution:
 
     def moveZeroes(self, nums: List[int]) -> None:
 
-        # return self.move_zeros(nums)
+        # return self.move_zerosA(nums)
         return self.move_zerosB(nums)
+        # return self.move_zerosC(nums)
 
-    def move_zeros(self, nums: List[int]) -> List[int]:
+    def move_zerosA(self, nums: List[int]) -> List[int]:
         count = 0
         for i in range(len(nums)):
             if nums[i] != 0:
@@ -33,16 +34,16 @@ class Solution:
 
         return nums
 
+    # 最low的解法
 
-"""
-    def move_zeros(self, nums: List[int]) -> List[int]:
+    def move_zerosC(self, nums: List[int]) -> List[int]:
         for num in nums:
             if num == 0:
                 nums.append(num)
                 nums.remove(num)
 
         return nums
-"""
+
 
 test = Solution()
 
